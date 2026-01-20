@@ -81,7 +81,6 @@ class HeteroGNN(torch.nn.Module):
         x_processed_dict[self.node_type] = h
 
         # 第二步：Conv1 + 残差连接
-        # 我们在这里保留了你代码中对维度匹配的严格校验逻辑
         out_conv1_dict = self.conv1(x_processed_dict, edge_index_dict, edge_attr_dict=edge_weight_dict)
         
         h_conv1 = out_conv1_dict[self.node_type]
@@ -97,4 +96,5 @@ class HeteroGNN(torch.nn.Module):
         # 第三步：Conv2 (输出层)
         out_conv2_dict = self.conv2(x_inter_dict, edge_index_dict, edge_attr_dict=edge_weight_dict)
         
+
         return out_conv2_dict
